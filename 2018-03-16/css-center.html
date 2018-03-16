@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css垂直居中</title>
+	<style>
+		body {
+			margin: 0;
+			height: 100vh;
+		}
+		#box {
+			height: 100%;
+			padding: 0 10px;
+			display: flex;
+			flex-direction: column; /* 垂直居中，我这里让他垂直排列 */
+			align-items: center;  /* 垂直居中的时候, 水平位置居中， 这里与flex-direction的设置有关 */
+			justify-content: center;  /* 垂直居中的时候 相对于垂直的位置，这里内容垂直居中*/
+		}
+		.child {
+			width: 100%;
+			height: calc(50vw - 10px);
+			background: #677788;
+			color: #111;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		#content {
+			background: #ff0;
+			width: 100%;
+            display: inline-block;
+			position: fixed;
+			left: 0;
+			top: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<!-- <div class="child">test</div> -->
+		<div class="child">A</div>
+	</div>
+	<div id="content">
+		如下要求: 1、A框相对于浏览器是垂直居中的。 2、A框水平位置距离屏幕有10px的空隙。 3、A框的高度保持为宽度的一半。4、A框内容水平垂直居中。
+	</div>
+</body>
+</html>
