@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css垂直居中 使用transform</title>
+	<style>
+		body {
+			margin: 0;
+			height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+		}
+		#box {
+            width: 70%;
+			height: 70%;
+            position: relative;
+            background: #d99;
+		}
+		.child {
+            position: absolute;
+			width: 70%;
+			height: 70%;
+			background: #677788;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);  /* 自身百分比 */
+            text-align: center;
+		}
+		#content {
+			background: #ff0;
+			width: 100%;
+            display: inline-block;
+			position: fixed;
+			left: 0;
+			top: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div class="child">A</div>
+	</div>
+	<div id="content">
+		如下要求: 相对于Box垂直水平居中, Box、A块宽高未知
+	</div>
+</body>
+</html>
