@@ -6,7 +6,7 @@
 
 快应用的架构共分为如下几层：
 
-![架构]("./1.png")
+![架构](./1.png)
 
 1、platform层。在这一层直接调用j2v8底层的方法与系统底层通信，并对快应用上层提供接口。
 
@@ -22,24 +22,24 @@
 
 由于前三层是共用架构，我们着手从dsl层开始改造。dsl文件目录如下
 
-![dsl文件目录]("./2.png")
+![dsl文件目录](./2.png)
 
 由于dsl层是与dock层通过sub/pub模式进行通信的。
 dsl层需要抽象出一个桥接层适配，桥接层里面暴露一个init方法对dock层暴露出来的快应用容器进行监听等初始化操作。监听内容包含快应用App初始化、Page初始化与销毁，Page级别的生命周期、事件触发以及回调。dsl层的代码负责监听回调的具体实现，以此达到与dock层解耦合的目的。
 
-![interface.js]("./3.png")
+![interface.js](./3.png)
 
 createApplication和createPage是快应用的重要阶段，以这个阶段为例来学习快应用是如何进行解耦的。
 
 infras.js执行之后，快应用安卓端会在合适的时机加载正确的dsl层代码。完成上述的初始化之后，安卓端触发createApp操作，dsl层接收到createApplication操作之后，触发监听函数，执行App的初始化操作，包括挂载属性和触发`applc:onCreate`生命周期等。
 
-![createApp.js]("./4.png")
+![createApp.js](./4.png)
 
 之后安卓端触发createPage操作，dsl层接收到createPage操作之后，执行Page的初始化操作。在Page的初始化的过程中，需要给Page绑定一个vm。
 
-![createPage.js]("./5.png")
+![createPage.js](./5.png)
 
 在这里我们使用了工厂模式传入page对应的document和dock层暴露的接口，这样使每一个Page产出一个绑定Page的Vue类。在该Page的每个组件都按照其Vue类进行组件的实例化。在每个Page的根组件里，混入了Page级别的API并绑定生命周期，达到Vue与Page的完美结合。
 
-![Vue工厂函数]("./6.png")
+![Vue工厂函数](./6.png)
 
